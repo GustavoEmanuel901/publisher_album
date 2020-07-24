@@ -1,0 +1,26 @@
+body {
+  background-color: #E3F41A;
+}
+
+.mobileAlignForm {
+  display: block;
+}
+
+.img-margin {
+  margin: 0px;
+}
+
+@media (max-width: 570px) {
+  .mobileAlignForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .img-margin {
+    margin-top: -60px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
