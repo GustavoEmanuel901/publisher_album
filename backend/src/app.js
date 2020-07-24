@@ -1,4 +1,8 @@
 const express = require("express")
+const cors = require('cors')
+const { errors } = require("celebrate")
+
+require('./database')
 
 class AppController {
     constructor() {
@@ -6,6 +10,8 @@ class AppController {
     
         this.middlewares();
         this.routes();
+        this.out();
+        this.ValidationErrors()
     }
     
     middlewares() {
@@ -14,6 +20,14 @@ class AppController {
     
     routes() {
         this.express.use(require("./routes"));
+    }
+
+    out() {
+        this.express.use(cors())
+    }
+
+    ValidationErrors() {
+        this.express.use(errors())
     }
 }
     
