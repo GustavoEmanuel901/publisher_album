@@ -3,7 +3,7 @@ const {celebrate, Segments, Joi} = require('celebrate')
 
 const UserController = require('./controllers/UserController')
 const AuthController = require('./controllers/AuthController')
-const ProjectController = require('./controllers/projectController')
+const ForgotPasswordController = require('./controllers/ForgotPasswordController')
 const projectController = require('./controllers/projectController')
 
 routes.get('/users', UserController.index)
@@ -21,6 +21,16 @@ routes.post('/users/register', celebrate({
 }), UserController.store)
 
 routes.post('/authenticate', AuthController.create)
+
+routes.post('/forgot_password', ForgotPasswordController.create)
+
+routes.post('/reset_password', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        email: Joi.string().required().email(),
+        token: Joi.string().required(),
+        password: Joi.string().required().min(6)
+    })
+}), ForgotPasswordController.reset)
 
 routes.get('/projects', projectController.index)
 

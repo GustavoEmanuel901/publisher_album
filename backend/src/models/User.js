@@ -11,7 +11,9 @@ class User extends Model {
             city: DataTypes.STRING,
             state: DataTypes.STRING,
             password: DataTypes.VIRTUAL,
-            password_hash: DataTypes.STRING
+            password_hash: DataTypes.STRING,
+            password_reset_token: DataTypes.STRING,
+            password_reset_expires: DataTypes.DATE
         }, 
         {
             sequelize

@@ -6,7 +6,7 @@ module.exports = {
 
     async create(req, res){
 
-        const { email, password} = req.body;
+        const { email, password } = req.body;
 
         const user = await User.findOne({
             where: { email }
@@ -21,6 +21,8 @@ module.exports = {
         }
 
         user.password_hash = undefined
+        user.password_reset_token = undefined
+        user.password_reset_expires = undefined
 
         return res.json({
             user,

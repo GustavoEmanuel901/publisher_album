@@ -24,6 +24,7 @@ module.exports = {
         try {
             const password_hash = await bcrypt.hash(password, 8)
 
+
             const user = await User.create({ 
                 name, 
                 user_name,
@@ -38,14 +39,16 @@ module.exports = {
                 from: 'Teste <cda57f68b483d2>',
                 to: email,
                 subject: 'Bem Vindo',
-                html: `<h1> Bem Vindo </h1>`
-            }).then(message =>{
-                console.log(message)
-            }).catch(err =>{
-                console.log(err)
+                template: 'templates/welcome',
+            }, err => {
+                if(err) {
+                    return res.status(400).json({error: "Cannot send forgot password email"})
+                }
             })
 
             user.password_hash = undefined
+            user.password_reset_token = undefined
+            user.password_reset_expires = undefined
             
             return res.json({
                 user,
