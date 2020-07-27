@@ -28,12 +28,10 @@ export default function Logon() {
                             </Row>
 
                             <Row form>
-                               
-                                    <Link to='/' className='link'>
-                                        <BsPersonFill size={16} color='#000'/>
-                                        Cadastre-se
-                                    </Link>
-                                
+                                <Link to='/register' className='link'>
+                                    <BsPersonFill size={16} color='#000'/>
+                                    Cadastre-se
+                                </Link>  
                             </Row>
 
                             <Row form>
