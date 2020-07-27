@@ -16,7 +16,6 @@ export default function Register() {
   const [city, setCity] = useState([])
   const [password, setPassword] = useState('')
   const [conPassword, setConPassword] = useState('')
-  const [token, setToken] = useState('')
 
   const [selectedState, setSelectedState] = useState('0')
   const [selectedCity, setselectedCity] = useState('0')
