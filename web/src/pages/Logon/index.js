@@ -72,9 +72,9 @@ export default function Logon() {
                             </Row>
 
                             <Row form>
-                                <Link to='/' className='link'>
+                                <Link to='/forgot_password' className='link'>
                                     <BsQuestionSquareFill size={16} color='#000'/>
-                                    Esqueceu a senha
+                                    Esqueceu a senha?
                                 </Link>
                             </Row>
                         </div>
