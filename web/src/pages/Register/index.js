@@ -198,7 +198,7 @@ export default function Register() {
                                 <div className="form-check">
                                     <Label className='form-check-label'>
                                         <Input type='checkbox' className='form-check-input' required/>
-                                        <Link to='/' className='form-link text-dark'>
+                                        <Link to='/terms_and_conditions' className='form-link text-dark'>
                                             Li e concordo com os termos de uso
                                         </Link>
                                     </Label>
