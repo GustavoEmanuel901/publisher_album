@@ -22,9 +22,10 @@ export default function Profile() {
       }
     }).then(res => {
       console.log(res.data)
-    }, [token])
+    })
+  }, [token])
 
-    
+
   return (
     <div>
       <h1>Bem vindo</h1>
@@ -38,4 +39,3 @@ export default function Profile() {
   );
 }
 
- 
