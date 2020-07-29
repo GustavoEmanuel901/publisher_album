@@ -4,8 +4,6 @@ import { Container, Col, Row } from 'reactstrap'
 import { BsArrowLeft } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 
-import './styles.css'
-
 export default function TermsAndConditions() {
     return (
         <Container>

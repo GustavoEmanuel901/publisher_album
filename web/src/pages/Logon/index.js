@@ -3,10 +3,11 @@ import { BsPersonFill, BsQuestionSquareFill} from 'react-icons/bs'
 import { Link, useHistory } from 'react-router-dom'
 import { Container, Row, Col, Form, Input, Label, Button} from 'reactstrap'
 
-import './style.css'
 import Logo from '../../assets/Logo.jpeg'
 
 import api from '../../services/api'
+
+import './styles.css'
 
 export default function Logon() {
 

@@ -25,7 +25,6 @@ export default function Profile() {
     })
   }, [token])
 
-
   return (
     <div>
       <h1>Bem vindo</h1>

@@ -6,7 +6,6 @@ import { Label, Form, Container, Row, Col, Input, FormGroup, Button} from 'react
 import axios from 'axios'
 import api from '../../services/api'
 
-
 export default function Register() {
   const [name, setName] = useState('')
   const [user_name, setUser_name] = useState('')
