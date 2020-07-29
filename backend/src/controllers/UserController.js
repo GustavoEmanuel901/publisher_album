@@ -4,7 +4,7 @@ const envEmail = require('../utils/email')
 const generateToken = require('../utils/generateToken')
 
 module.exports = {
-    async index(req, res) {
+    async index(req, res, next) {
         const Users = await User.findAll()
 
         return res.json(Users)

@@ -1,7 +1,3 @@
-require('dotenv').config({
-    path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
-})
-
 const express = require("express")
 const cors = require('cors')
 const { errors } = require("celebrate")
@@ -12,9 +8,9 @@ class AppController {
     constructor() {
         this.express = express();
     
+        this.out();
         this.middlewares();
         this.routes();
-        this.out();
         this.ValidationErrors()
     }
     
