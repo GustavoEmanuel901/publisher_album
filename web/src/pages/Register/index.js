@@ -58,7 +58,7 @@ export default function Register() {
         const UfStates = response.data.map(uf => uf.sigla)
         setState(UfStates)
     })
-  })
+  }, [])
 
   useEffect(() =>{
     if (selectedState === '0')
