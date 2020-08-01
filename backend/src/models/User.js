@@ -1,9 +1,12 @@
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcryptjs')
 
 class User extends Model {
     static init(sequelize) {
         super.init({
+            id: {
+                type: DataTypes.STRING,
+                primaryKey: true
+            },
             name: DataTypes.STRING,
             user_name: DataTypes.STRING,
             email: DataTypes.STRING,

@@ -2,6 +2,7 @@ const User = require("../../models/User")
 const bcrypt = require('bcryptjs')
 const envEmail = require('../../utils/email')
 const generateToken = require('../../utils/generateToken')
+const generateUniqueId = require('../../utils/generateUniqueId')
 
 module.exports = {
     async index(req, res, next) {
@@ -21,11 +22,16 @@ module.exports = {
             password
         } = req.body
 
+        const id = generateUniqueId()
+
+        console.log(id)
+
         try {
             const password_hash = await bcrypt.hash(password, 8)
 
 
             const user = await User.create({ 
+                id,
                 name, 
                 user_name,
                 email,
