@@ -24,8 +24,6 @@ module.exports = {
 
         const id = generateUniqueId()
 
-        console.log(id)
-
         try {
             const password_hash = await bcrypt.hash(password, 8)
 
