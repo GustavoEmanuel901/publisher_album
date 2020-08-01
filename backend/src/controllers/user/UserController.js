@@ -1,7 +1,7 @@
-const User = require("../models/User")
+const User = require("../../models/User")
 const bcrypt = require('bcryptjs')
-const envEmail = require('../utils/email')
-const generateToken = require('../utils/generateToken')
+const envEmail = require('../../utils/email')
+const generateToken = require('../../utils/generateToken')
 
 module.exports = {
     async index(req, res, next) {

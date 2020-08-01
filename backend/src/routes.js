@@ -1,10 +1,10 @@
 const routes = require('express').Router()
 const {celebrate, Segments, Joi} = require('celebrate')
 
-const UserController = require('./controllers/UserController')
-const AuthController = require('./controllers/AuthController')
-const ForgotPasswordController = require('./controllers/ForgotPasswordController')
-const projectController = require('./controllers/projectController')
+const UserController = require('./controllers/user/UserController')
+const AuthController = require('./controllers/user/AuthController')
+const ForgotPasswordController = require('./controllers/user/ForgotPasswordController')
+const projectController = require('./controllers/user/projectController')
 
 routes.get('/users', UserController.index)
 

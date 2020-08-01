@@ -1,5 +1,5 @@
-const User = require('../models/User')
-const EnvEmail = require('../utils/email')
+const User = require('../../models/User')
+const EnvEmail = require('../../utils/email')
 const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
 
