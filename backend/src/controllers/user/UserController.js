@@ -63,5 +63,9 @@ module.exports = {
             return res.status(400).send({ error: 'Registration failed'})
         }
         
+    }, 
+
+    async delete(req, res){
+        
     }
 }
