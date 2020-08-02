@@ -3,13 +3,47 @@ const bcrypt = require('bcryptjs')
 const envEmail = require('../../utils/email')
 const generateToken = require('../../utils/generateToken')
 const generateUniqueId = require('../../utils/generateUniqueId')
+const jwt = require('jsonwebtoken')
 
 module.exports = {
     async index(req, res, next) {
-        const Users = await User.findAll()
+        
+        const authHeader = req.headers.authorization
 
-        return res.json(Users)
-    },
+        try {
+            if (!authHeader) {
+                return res.status(401).send({ error: 'No token provided' })
+            }
+
+            const parts = authHeader.split(' ')
+
+            if (!parts.length === 2) {
+                return res.status(401).send({ error: 'Token error' })
+            }
+
+            const [scheme, tokenValidate] = parts
+
+            if (scheme !== 'Bearer') {
+                return res.status(401).send({ error: 'Token bad formatted' })
+            }
+
+            jwt.verify(tokenValidate, process.env.APP_SECRET, async (err, decoded) => {
+                if (err) return res.status(401).send({ error: 'Token invalid' })
+        
+                req.userId = decoded.id
+
+                const Users = await User.findAll()
+
+                Users.password_hash = undefined
+
+                return res.json(Users)
+            })
+
+        } catch (err) {
+            res.status(401).json({error: 'Users not found'})
+        }
+    
+},
 
     async store(req, res) {
         const {
@@ -66,5 +100,41 @@ module.exports = {
 
     async delete(req, res){
         
+        const { id } = req.params
+
+        const authHeader = req.headers.authorization
+
+        try {
+            if (!authHeader) {
+                return res.status(401).send({ error: 'No token provided' })
+            }
+
+            const parts = authHeader.split(' ')
+
+            if (!parts.length === 2) {
+                return res.status(401).send({ error: 'Token error' })
+            }
+
+            const [scheme, tokenValidate] = parts
+
+            if (scheme !== 'Bearer') {
+                return res.status(401).send({ error: 'Token bad formatted' })
+            }
+
+            jwt.verify(tokenValidate, process.env.APP_SECRET, async (err, decoded) => {
+                if (err) return res.status(401).send({ error: 'Token invalid' })
+        
+                req.userId = decoded.id
+
+                await User.destroy({
+                    where: { id }
+                })
+
+                res.json({ ok: true })
+
+            })
+        } catch (err) {
+            
+        }
     }
 }

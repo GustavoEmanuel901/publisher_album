@@ -17,8 +17,6 @@ const AdminResetPassword = require('./controllers/admin/AdminResetPassword')
 
 //Users Routes
 
-routes.get('/users', UserController.index)
-
 routes.post('/users/register', celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required().min(3),
@@ -54,5 +52,9 @@ routes.post('/admin/register', AdminController.store)
 routes.post('/admin/forgot', AdminResetPassword.forgot)
 
 routes.post('/admin/reset', AdminResetPassword.reset)
+
+routes.get('/admin/list_user', UserController.index)
+
+routes.delete('/admin/delete_user/:id', UserController.delete)
 
 module.exports = routes
