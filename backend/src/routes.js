@@ -29,9 +29,18 @@ routes.post('/users/register', celebrate({
     })  
 }), UserController.store)
 
-routes.post('/authenticate', AuthController.create)
+routes.post('/authenticate', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        email: Joi.string().required().email(),
+        password: Joi.string().required().min(6)
+    })
+}), AuthController.create)
 
-routes.post('/forgot_password', ForgotPasswordController.create)
+routes.post('/forgot_password', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        email: Joi.string().required().email()
+    })
+}), ForgotPasswordController.create)
 
 routes.post('/reset_password', celebrate({
     [Segments.BODY]: Joi.object().keys({
@@ -45,13 +54,32 @@ routes.get('/projects', projectController.index)
 
 //Admin Routes
 
-routes.post('/admin/authenticate', AdminAuthController.create)
+routes.post('/admin/authenticate', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        user_name: Joi.string().required(),
+        password: Joi.string().required().min(6)
+    })
+}), AdminAuthController.create)
 
-routes.post('/admin/register', AdminController.store)
+routes.post('/admin/register', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        name: Joi.string().required(),
+        user_name: Joi.string().required(),
+        email: Joi.string().required().email()
+    })
+}), AdminController.store)
 
-routes.post('/admin/forgot', AdminResetPassword.forgot)
+routes.post('/admin/forgot', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        email: Joi.string().required.email()
+    })
+}), AdminResetPassword.forgot)
 
-routes.post('/admin/reset', AdminResetPassword.reset)
+routes.post('/admin/reset', celebrate({
+    email: Joi.string().required().email(),
+    token: Joi.string().required(),
+    password: Joi.string().required().min(6)
+}), AdminResetPassword.reset)
 
 routes.get('/admin/list_user', UserController.index)
 
