@@ -48,6 +48,6 @@ routes.get('/projects', projectController.index)
 
 routes.post('/admin/authenticate', AdminAuthController.create)
 
-//routes.post('/teste', AdminController.store)
+routes.post('/admin/register', AdminController.store)
 
 module.exports = routes

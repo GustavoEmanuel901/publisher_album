@@ -1,41 +1,48 @@
 const Admin = require("../../models/Admin")
 const bcrypt = require('bcryptjs')
-//const envEmail = require('../../utils/email')
-const generateToken = require('../../utils/generateToken')
-const generateUniqueId = require('../../utils/generateUniqueId') 
+const envEmail = require('../../utils/email')
+const generateUniqueId = require('../../utils/generateUniqueId')
+const generateFirstPassword = require('../../utils/generateFistPassword')
+const Auth = require('../../middlewares/auth')
 
 module.exports = {
     
     async store(req,res) {
+
         const {
             name, 
             user_name,
-            email,
-            password
+            email
         } = req.body
     
         const id = generateUniqueId()
+        const password = generateFirstPassword()
     
         try {
             const password_hash = await bcrypt.hash(password, 8)
     
-            const admin = await Admin.create({ 
+            await Admin.create({ 
                 id,
                 name, 
                 user_name,
                 email,
                 password_hash
             })
-    
-            admin.password_hash = undefined
-            admin.password_reset_token = undefined
-            admin.password_reset_expires = undefined
-            
-            return res.json({
-                admin,
-                token: generateToken({id: admin.id})
+
+            envEmail.sendMail({
+                from: 'Teste <cda57f68b483d2>',
+                to: email,
+                subject: 'Bem Vindo a nossa equipe',
+                template: 'templates/Welcome_Admin',
+                context: { password, user_name }
+            }, err => {
+                if(err) {
+                    return res.status(400).json({error: "Cannot send forgot password email"})
+                }
             })
-            
+    
+            Auth(req, res)
+
         } catch (err) {
             return res.status(400).send({ error: 'Registration failed'})
         }
