@@ -1,10 +1,20 @@
 const routes = require('express').Router()
 const {celebrate, Segments, Joi} = require('celebrate')
 
+//User Controllers
+
 const UserController = require('./controllers/user/UserController')
 const AuthController = require('./controllers/user/AuthController')
 const ForgotPasswordController = require('./controllers/user/ForgotPasswordController')
 const projectController = require('./controllers/user/projectController')
+
+
+//Admins Controllers
+
+const AdminAuthController = require('./controllers/admin/AdminAuthController')
+const AdminController = require('./controllers/admin/AdminController')
+
+//Users Routes
 
 routes.get('/users', UserController.index)
 
@@ -33,5 +43,11 @@ routes.post('/reset_password', celebrate({
 }), ForgotPasswordController.reset)
 
 routes.get('/projects', projectController.index)
+
+//Admin Routes
+
+routes.post('/admin/authenticate', AdminAuthController.create)
+
+//routes.post('/teste', AdminController.store)
 
 module.exports = routes
