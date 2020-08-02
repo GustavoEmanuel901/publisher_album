@@ -17,8 +17,15 @@ module.exports = {
     
         const id = generateUniqueId()
         const password = generateFirstPassword()
+
+        const validator = Auth(req, res)
     
         try {
+
+            if(validator.statusCode === 401){
+                return 
+            }
+
             const password_hash = await bcrypt.hash(password, 8)
     
             await Admin.create({ 
@@ -40,8 +47,6 @@ module.exports = {
                     return res.status(400).json({error: "Cannot send forgot password email"})
                 }
             })
-    
-            Auth(req, res)
 
         } catch (err) {
             return res.status(400).send({ error: 'Registration failed'})

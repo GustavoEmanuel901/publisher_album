@@ -13,6 +13,7 @@ const projectController = require('./controllers/user/projectController')
 
 const AdminAuthController = require('./controllers/admin/AdminAuthController')
 const AdminController = require('./controllers/admin/AdminController')
+const AdminResetPassword = require('./controllers/admin/AdminResetPassword')
 
 //Users Routes
 
@@ -49,5 +50,9 @@ routes.get('/projects', projectController.index)
 routes.post('/admin/authenticate', AdminAuthController.create)
 
 routes.post('/admin/register', AdminController.store)
+
+routes.post('/admin/forgot', AdminResetPassword.forgot)
+
+routes.post('/admin/reset', AdminResetPassword.reset)
 
 module.exports = routes
