@@ -1,5 +1,7 @@
 const routes = require('express').Router()
 const {celebrate, Segments, Joi} = require('celebrate')
+const multer = require('multer')
+const multerConfig = require('./config/multer')
 
 //User Controllers
 
@@ -14,6 +16,10 @@ const projectController = require('./controllers/user/projectController')
 const AdminAuthController = require('./controllers/admin/AdminAuthController')
 const AdminController = require('./controllers/admin/AdminController')
 const AdminResetPassword = require('./controllers/admin/AdminResetPassword')
+
+//Cover Image Controllers
+
+const CoverImageController = require('./controllers/coverImage/CoverImageController')
 
 //Users Routes
 
@@ -71,18 +77,26 @@ routes.post('/admin/register', celebrate({
 
 routes.post('/admin/forgot', celebrate({
     [Segments.BODY]: Joi.object().keys({
-        email: Joi.string().required.email()
+        email: Joi.string().required().email()
     })
 }), AdminResetPassword.forgot)
 
 routes.post('/admin/reset', celebrate({
-    email: Joi.string().required().email(),
-    token: Joi.string().required(),
-    password: Joi.string().required().min(6)
+   [Segments.BODY]: Joi.object().keys({
+        email: Joi.string().required().email(),
+        token: Joi.string().required(),
+        password: Joi.string().required().min(6)
+   })
 }), AdminResetPassword.reset)
 
 routes.get('/admin/list_user', UserController.index)
 
 routes.delete('/admin/delete_user/:id', UserController.delete)
+
+routes.post('/admin/register-album/cover-image', multer(multerConfig).single('file'), CoverImageController.store)
+
+routes.get('/admin/list/cover_images', CoverImageController.index)
+
+routes.delete('/admin/delete/cover_images/:id/:key', CoverImageController.delete)
 
 module.exports = routes

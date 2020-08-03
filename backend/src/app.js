@@ -16,6 +16,7 @@ class AppController {
         this.middlewares();
         this.routes();
         this.ValidationErrors()
+        this.encoded()
         this.Morgan()
         this.files()
     }
@@ -42,6 +43,10 @@ class AppController {
 
     files(){
         this.express.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')))
+    }
+
+    encoded() {
+        this.express.use(express.urlencoded({ extended: true}))
     }
 
 }
