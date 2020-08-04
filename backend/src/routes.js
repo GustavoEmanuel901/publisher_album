@@ -16,6 +16,10 @@ const AdminAuthController = require('./controllers/admin/AdminAuthController')
 const AdminController = require('./controllers/admin/AdminController')
 const AdminResetPassword = require('./controllers/admin/AdminResetPassword')
 
+//Card Controllers
+
+const CardController = require('./controllers/cards/CardController')
+
 //Images Controllers
 
 const CoverImageController = require('./controllers/images/CoverImageController')
@@ -92,6 +96,11 @@ routes.post('/admin/reset', celebrate({
 routes.get('/admin/list_user', UserController.index)
 
 routes.delete('/admin/delete_user/:id', UserController.delete)
+
+routes.post('/admin/register-card', CardController.store)
+
+
+//Routes Admins Images
 
 routes.post('/admin/register-album/cover-image', multer(multerConfig).single('file'), CoverImageController.store)
 

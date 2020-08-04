@@ -16,6 +16,8 @@ class CardImage extends Model {
             sequelize
         })
     }
+
+    static associate
 }
 
 module.exports = CardImage
