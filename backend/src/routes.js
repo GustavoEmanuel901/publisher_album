@@ -10,16 +10,16 @@ const AuthController = require('./controllers/user/AuthController')
 const ForgotPasswordController = require('./controllers/user/ForgotPasswordController')
 const projectController = require('./controllers/user/projectController')
 
-
 //Admins Controllers
 
 const AdminAuthController = require('./controllers/admin/AdminAuthController')
 const AdminController = require('./controllers/admin/AdminController')
 const AdminResetPassword = require('./controllers/admin/AdminResetPassword')
 
-//Cover Image Controllers
+//Images Controllers
 
-const CoverImageController = require('./controllers/coverImage/CoverImageController')
+const CoverImageController = require('./controllers/images/CoverImageController')
+const CardImageController = require('./controllers/images/CardImageController')
 
 //Users Routes
 
@@ -98,5 +98,11 @@ routes.post('/admin/register-album/cover-image', multer(multerConfig).single('fi
 routes.get('/admin/list/cover_images', CoverImageController.index)
 
 routes.delete('/admin/delete/cover_images/:id/:key', CoverImageController.delete)
+
+routes.post('/admin/register-card/card-image', multer(multerConfig).single('file'), CardImageController.store)
+
+routes.get('/admin/list/card_images', CardImageController.index)
+
+routes.delete('/admin/delete/card_image/:id/:key', CardImageController.delete)
 
 module.exports = routes

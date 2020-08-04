@@ -130,7 +130,7 @@ module.exports = {
 
                 if(process.env.STORAGE_TYPE === 's3') {
                     s3.deleteObject({
-                        Bucket: 'uploadexamplegustavo',
+                        Bucket: process.env.AWS_BUCKET_NAME,
                         Key: key ,
                     }).promise()
                 } else {
